@@ -1,5 +1,38 @@
-# Vivino API
+How to Request Data:
 
+- To request data from this microservice:
+
+- Connect to the ZeroMQ server via a tcp://localhost:5555 socket.
+- Send a string containing the wine name to the server.
+- Optionally, filter results by price range (parameters like minPrice and maxPrice are hardcoded in the microservice, e.g., 10-50).
+
+Steps:
+
+1. Create a ZeroMQ context.
+2. Set up a ZeroMQ REQ (request) socket.
+3. Connect the socket to the server's address (tcp://localhost:5555).
+4. Send a string with the desired wine name (e.g., "Chardonnay").
+5. Wait for a response from the server.
+6. How to Receive Data
+
+Once the server processes the request:
+- The response will be a string in one of the following formats:
+- 
+Success Message:
+
+Wine: Chardonnay Reserve, Thumbnail: <url>, Link: <url>
+
+Error Messages:
+
+Error: Too many results found. Please provide more specific wine details in the name.
+OR
+Error: No results found. Please check the wine name or provide more details.
+
+Steps to Handle Response:
+
+Wait for the server to send a response.
+Check the response string for the word "Error" to detect errors.
+If no error, display the success message with wine details.
 Vivino API is Node.js console app to select vivino.com items by the following params:
 
 - **name** - _Required_ wine name
